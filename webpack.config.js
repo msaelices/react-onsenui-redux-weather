@@ -55,6 +55,7 @@ module.exports = {
             {
               loader: 'postcss-loader',
               options: {
+                warnings: false,
                 plugins: [
                   require('postcss-smart-import')(),
                   require('postcss-url')(),
