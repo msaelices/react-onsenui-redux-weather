@@ -1,0 +1,18 @@
+@import url('./theme.css');
+@import url('~onsenui/css-components-src/src/components/index.css');
+@import url('~onsenui/css-components-src/src/iphonex-support/index.css');
+
+
+// TODO: These styles should not be needed but somehow the @apply function is
+// not working in onsenui CSS
+.page {
+  font-family: -apple-system, 'Helvetica Neue', 'Helvetica', 'Arial', 'Lucida Grande', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-weight: var(--font-weight);
+}
+
+.page--material {
+  font-family: 'Roboto', 'Noto', sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
