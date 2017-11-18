@@ -1,3 +1,5 @@
+import ons from 'onsenui';
+
 import {
   ADD_LOCATION,
   REMOVE_LOCATION,
