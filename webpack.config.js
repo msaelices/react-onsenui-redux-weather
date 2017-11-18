@@ -1,69 +1,101 @@
-var webpack = require('webpack');
 var path = require('path');
+var webpack = require('webpack');
+var ExtractTextPlugin = require('extract-text-webpack-plugin');
+var HtmlWebpackPlugin = require('html-webpack-plugin');
 
-var autoprefixer = require('autoprefixer');
+var browserTargets = [
+  '> 1%',
+  'iOS >= 8.0',
+  'Android >= 4.4',
+  'Chrome >= 30',
+  'Safari >= 9',
+  'Firefox ESR',
+  'Opera 12.1'
+];
+
+var babelOptions = {
+  babelrc: false,
+  presets: ['es2015', 'stage-2', 'react']
+};
 
 module.exports = {
-  devtool: 'eval-source-map',
-  context: __dirname,
-  entry: [
-    'react-hot-loader/patch',
-    'webpack-dev-server/client?http://0.0.0.0:9000',
-    'webpack/hot/only-dev-server',
-    './index.js'
-  ],
+  watch: process.env.WEBPACK_WATCH === 'true',
+  entry: './src/index.js',
   output: {
-    path: path.join(__dirname, 'www'),
+    path: path.resolve(__dirname, './www'),
+    publicPath: '',
     filename: 'bundle.js'
   },
-
-  devServer: {
-    colors: true,
-    historyApiFallback: true,
-    inline: false,
-    port: 9000,
-    hot: true
-  },
-
   module: {
-    loaders: [
+    rules: [
       {
         test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/,
         loader: 'url-loader?limit=10000&minetype=application/font-woff'
       },
-      { test: /\.(ttf|eot|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
-        loader: 'file-loader'
+      {
+        test: /\.(png|jpe?g|gif|svg|woff|woff2|ttf|eot|ico)$/,
+        loader: 'file-loader',
+        options: {
+          name: '[name].[ext]?[hash]'
+        }
       },
       {
         test: /\.json$/,
-        loader: 'json'
+        loader: 'json-loader'
       },
       {
         test: /\.css$/,
-        loader: 'style!css!postcss'
-      },
-      {
-        test: /\.styl$/,
-        loader: 'style!css!postcss!stylus?paths=node_modules'
+        loader: ExtractTextPlugin.extract({
+          fallback: 'style-loader',
+          use: [
+            {
+              loader: 'css-loader',
+              options: { importLoaders: 1 }
+            },
+            {
+              loader: 'postcss-loader',
+              options: {
+                plugins: [
+                  require('postcss-smart-import')(),
+                  require('postcss-url')(),
+                  require('postcss-base64')({ extensions: ['.svg'], root: 'src' }),
+                  require('postcss-cssnext')({ browsers: browserTargets })
+                ]
+              }
+            }
+          ]
+        })
       },
       {
         test: /\.js$/,
-        loader: 'babel',
-        query: {
-          'presets': ['es2015', 'stage-2', 'react'],
-          'plugins': ['react-hot-loader/babel']
-        },
+        loader: 'babel-loader',
+        options: babelOptions,
         exclude: path.join(__dirname, 'node_modules')
       }
     ]
   },
-
-  postcss: function() {
-    return [autoprefixer];
-  },
-
   plugins: [
+    new ExtractTextPlugin('[name].css'),
     new webpack.HotModuleReplacementPlugin()
   ]
 };
 
+if (process.env.NODE_ENV === 'production') {
+  module.exports.devtool = '#source-map';
+  module.exports.plugins = (module.exports.plugins || []).concat([
+    new webpack.DefinePlugin({
+      'process.env': {
+        NODE_ENV: '"production"'
+      }
+    }),
+    new webpack.optimize.UglifyJsPlugin({
+      sourceMap: true,
+      compress: {
+        warnings: false
+      }
+    }),
+    new webpack.LoaderOptionsPlugin({
+      minimize: true
+    })
+  ]);
+}
