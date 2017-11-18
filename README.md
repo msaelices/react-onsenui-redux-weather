@@ -13,8 +13,8 @@ Check out the demo [here](http://argelius.github.io/react-onsenui-redux-weather/
 To run it simply do:
 
 ```bash
-npm install
-npm start
+yarn install
+yarn start
 ```
 
 The app will run at [http://localhost:9000](http://localhost:9000).
@@ -26,13 +26,13 @@ You can build it using Cordova.
 - [Install Cordova](https://cordova.apache.org/docs/en/latest/guide/cli/index.html#installing-the-cordova-cli):
 
 ```
-npm install -g cordova
+yarn install -g cordova
 ```
 
 You need to build the project:
 
 ```
-npm run build
+yarn build
 ```
 
 Add a platform to run it on a device or emulator. For Android:
