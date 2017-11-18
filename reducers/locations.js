@@ -1,3 +1,5 @@
+import ons from 'onsenui';
+
 import {
   ADD_LOCATION,
   REMOVE_LOCATION,
@@ -55,6 +57,7 @@ const locations = (state = {}, action) => {
       };
     case REMOVE_LOCATION:
       const {...rest} = state;
+      ons.notification.toast(`${rest[action.id].name} deleted`, {timeout: 3000, buttonLabel: 'Dismiss'});
       delete rest[action.id];
       return rest;
     case SET_FETCH_ERROR:
