@@ -60,7 +60,7 @@ const Location = ({
   } else {
     subtitle = (
       <span>
-        {temperature}&deg;C&nbsp;
+        &nbsp;{temperature}&deg;C&nbsp;
         {humidity}%
       </span>
     );
