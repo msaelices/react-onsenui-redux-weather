@@ -2,7 +2,7 @@ import fetch from 'isomorphic-fetch';
 import Promise from 'promise';
 
 const API_KEY = '5a043a1bd95bf3ee500eb89de107b41e';
-const API_URL = 'http://api.openweathermap.org/data/2.5';
+const API_URL = 'https://api.openweathermap.org/data/2.5';
 
 // http://api.openweathermap.org/data/2.5/forecast/daily?id=524901&cnt=5&appid=5a043a1bd95bf3ee500eb89de107b41e
 
