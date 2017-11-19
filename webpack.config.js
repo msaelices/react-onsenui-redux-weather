@@ -78,7 +78,8 @@ module.exports = {
   plugins: [
     new ExtractTextPlugin('[name].css'),
     new webpack.HotModuleReplacementPlugin()
-  ]
+  ],
+  devtool: '#eval-source-map'
 };
 
 if (process.env.NODE_ENV === 'production') {
