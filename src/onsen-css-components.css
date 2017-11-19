@@ -1,3 +1,4 @@
 @import url('./theme.css');
 @import url('../node_modules/onsenui/css-components-src/src/components/index.css');
+@import url('../node_modules/onsenui/css/material-design-iconic-font/css/material-design-iconic-font.min.css');
 @import url('../node_modules/onsenui/css-components-src/src/iphonex-support/index.css');
