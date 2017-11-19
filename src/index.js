@@ -31,7 +31,7 @@ const store = createStore(weatherApp,
 
 import {addLocationAndFetchWeather} from './actions';
 
-if (Object.keys(store.getState().locations).length == 0) {
+if (Object.keys(store.getState().locations).length === 0) {
   [
     'Tokyo',
     'New York',
