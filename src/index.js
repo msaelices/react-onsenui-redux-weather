@@ -2,7 +2,8 @@ import React from 'react';
 import {render} from 'react-dom';
 
 import {Provider} from 'react-redux';
-import {createStore, applyMiddleware} from 'redux';
+import {compose, createStore, applyMiddleware} from 'redux';
+import persistState from 'redux-localstorage';
 import thunk from 'redux-thunk';
 import createLogger from 'redux-logger';
 import {AppContainer} from 'react-hot-loader';
@@ -20,22 +21,27 @@ const logger = createLogger();
 
 const store = createStore(weatherApp,
   window.devToolsExtension ? window.devToolsExtension() : f => f,
-  process.env.NODE_ENV === 'production'
-    ? applyMiddleware(thunk)
-    : applyMiddleware(thunk, logger)
+  compose(
+    process.env.NODE_ENV === 'production'
+      ? applyMiddleware(thunk)
+      : applyMiddleware(thunk, logger),
+    persistState()
+  )
 );
 
 import {addLocationAndFetchWeather} from './actions';
 
-[
-  'Tokyo',
-  'New York',
-  'London',
-  'Beijing',
-  'Sydney',
-  'Rio de Janeiro',
-  'Istanbul'
-].forEach((city) => store.dispatch(addLocationAndFetchWeather(city)));
+if (Object.keys(store.getState().locations).length == 0) {
+  [
+    'Tokyo',
+    'New York',
+    'London',
+    'Beijing',
+    'Sydney',
+    'Rio de Janeiro',
+    'Istanbul'
+  ].forEach((city) => store.dispatch(addLocationAndFetchWeather(city)));
+}
 
 const rootElement = document.getElementById('root');
 
