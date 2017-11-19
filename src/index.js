@@ -12,7 +12,7 @@ import App from './components/App';
 
 import ons from 'onsenui';
 
-import 'onsenui/css/onsenui.css'; // Onsen UI basic CSS
+import 'onsenui/css/onsenui-core.min.css'; // Onsen UI basic CSS
 import './onsen-css-components.css'; // Onsen UI CSS components source
 import './icons/css/weather-icons.css';
 
