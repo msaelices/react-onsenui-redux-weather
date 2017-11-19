@@ -79,10 +79,10 @@ const Location = ({
         </div>
       </div>
       <div className='center'>
-        <div className='list__item__title'>
+        <div className='list-item__title'>
           {name}
         </div>
-        <div className='list__item__subtitle'>
+        <div className='list-item__subtitle'>
           {subtitle}
         </div>
       </div>
