@@ -39,7 +39,8 @@ if (Object.keys(store.getState().locations).length === 0) {
     'Beijing',
     'Sydney',
     'Rio de Janeiro',
-    'Istanbul'
+    'Istanbul',
+    'Sevilla'
   ].forEach((city) => store.dispatch(addLocationAndFetchWeather(city)));
 }
 
