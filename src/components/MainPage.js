@@ -16,7 +16,6 @@ import {updateForecasts} from '../actions';
 class MainPage extends React.Component {
   constructor(props) {
     super(props);
-    console.log(props);
 
     this.state = {
       pullingState: 'initial',
