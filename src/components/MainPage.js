@@ -1,5 +1,5 @@
 import React from 'react';
-import {connect} from 'react-redux'
+import {connect} from 'react-redux';
 
 import {
   Icon,
@@ -12,13 +12,12 @@ import LocationList from '../containers/LocationList';
 import AddLocation from '../containers/AddLocation';
 import {updateForecasts} from '../actions';
 
-
 class MainPage extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      pullingState: 'initial',
+      pullingState: 'initial'
     };
     this.dispatch = props.dispatch;
 
@@ -45,22 +44,21 @@ class MainPage extends React.Component {
       case 'initial':
         return (
           <span>
-            <Icon size={20} spin={false} icon='long-arrow-down' class="left" />
+            <Icon size={20} spin={false} icon='long-arrow-down' class='left' />
             Pull to refresh
           </span>
         );
       case 'preaction':
         return (
           <span>
-            <Icon size={20} spin={false} icon='long-arrow-up' class="left" />
+            <Icon size={20} spin={false} icon='long-arrow-up' class='left' />
             Release
           </span>
         );
-        return 'Release';
       case 'action':
         return (
           <span>
-            <Icon size={20} spin={true} icon='refresh' class="left" />
+            <Icon size={20} spin={true} icon='refresh' class='left' />
             Loading...
           </span>
         );
@@ -83,6 +81,5 @@ class MainPage extends React.Component {
     );
   }
 }
-MainPage = connect()(MainPage)
 
-export default MainPage;
+export default connect()(MainPage);
