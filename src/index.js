@@ -5,7 +5,7 @@ import {Provider} from 'react-redux';
 import {compose, createStore, applyMiddleware} from 'redux';
 import persistState from 'redux-localstorage';
 import thunk from 'redux-thunk';
-import createLogger from 'redux-logger';
+import {createLogger} from 'redux-logger';
 import {AppContainer} from 'react-hot-loader';
 
 import weatherApp from './reducers';
