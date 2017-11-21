@@ -45,6 +45,16 @@ export const setFetchError = id => ({
   id
 });
 
+export const updateForecasts = (id) => {
+
+  return (dispatch, getState) => {
+    Object.entries(getState().locations).map(([id, location]) => {
+      console.log('fetching...' + id);
+      dispatch(fetchWeather(id));
+    });
+  };
+};
+
 export const fetchWeather = (id) => {
   /*
    * This function requests and receives the
