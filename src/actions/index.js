@@ -47,7 +47,7 @@ export const setFetchError = id => ({
 
 export const updateForecasts = (id) => {
   return (dispatch, getState) => {
-    Object.entries(getState().locations).map(([id, location]) => {
+    Object.keys(getState().locations).forEach((id) => {
       dispatch(fetchWeather(id));
     });
   };
