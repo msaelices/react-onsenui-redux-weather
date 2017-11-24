@@ -14,18 +14,16 @@ class NavApp extends React.Component {
   }
 
   onGoBack() {
-    this.props.navigator.popPage();
+    this.props.popPage();
   }
 
   render() {
-    const {title, navigator, backButton} = this.props;
-
-    console.log(navigator.pages.length);
+    const {title, popPage, backButton} = this.props;
 
     return (
       <Toolbar>
         <div className='left'>
-          {backButton ? <BackButton onClick={this.onGoBack}>Back</BackButton> : null}
+          {backButton ? <BackButton navigator={navigator} onClick={this.onGoBack}>Back</BackButton> : null}
         </div>
         <div className='center'>{title}</div>
       </Toolbar>

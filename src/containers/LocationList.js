@@ -5,13 +5,13 @@ import {List} from 'react-onsenui';
 
 import Location from './Location';
 
-const LocationList = ({locations, navigator}) => (
+const LocationList = ({locations, pushPage}) => (
   <List
     dataSource={Object.keys(locations).map((key) => locations[key])}
     renderRow={(location) =>
       <Location
         key={location.id}
-        navigator={navigator}
+        pushPage={pushPage}
         {...location}
       />
     }

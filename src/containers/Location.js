@@ -42,7 +42,7 @@ const Location = ({
   country,
   isFetching,
   isInvalid,
-  navigator,
+  pushPage,
   actions
 }) => {
   let subtitle;
@@ -71,7 +71,7 @@ const Location = ({
   return (
     <ListItem onClick={() => {
       actions.selectLocation(id);
-      navigator.pushPage({component: WeatherPage, key: 'WEATHER-PAGE'});
+      pushPage(WeatherPage, 'WEATHER-PAGE');
     }} tappable>
       <div className='left'>
         <div style={{...styles.weatherIcon, backgroundColor: weatherColor}}>

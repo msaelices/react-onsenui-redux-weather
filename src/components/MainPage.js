@@ -7,6 +7,8 @@ import {
   ListItem,
   Page,
   PullHook,
+  RouterNavigator,
+  RouterUtil,
   Splitter,
   SplitterContent,
   SplitterSide,
@@ -27,33 +29,22 @@ const styles = {
   }
 };
 
-class MainPage extends React.Component {
+
+class ListPage extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
       pullingState: 'initial',
-      isOpen: false
+      isOpen: false,
     };
     this.dispatch = props.dispatch;
 
-    this.menuItems = [
-      {title: 'Add location', icon: 'ion-plus', page: null},
-      {title: 'Settings', icon: 'ion-gear-b', page: null}
-    ];
-
-    // bind
+    // bindings to be able to access `this`
     this.handleChange = this.handleChange.bind(this);
     this.handleLoad = this.handleLoad.bind(this);
     this.getContent = this.getContent.bind(this);
-    this.onOpenMenu = this.onOpenMenu.bind(this);
-    this.onCloseMenu = this.onCloseMenu.bind(this);
-    this.onClickMenuPage = this.onClickMenuPage.bind(this);
     this.renderToolbar = this.renderToolbar.bind(this);
-  }
-
-  handleChange(e) {
-    this.setState({pullingState: e.state});
   }
 
   handleLoad(done) {
@@ -64,17 +55,8 @@ class MainPage extends React.Component {
     setTimeout(() => done(), 1000);
   }
 
-  onCloseMenu() {
-    this.setState({isOpen: false});
-  }
-
-  onOpenMenu() {
-    this.setState({isOpen: true});
-  }
-
-  onClickMenuPage(page) {
-    this.onCloseMenu();
-    // TODO: Go to the page
+  handleChange(e) {
+    this.setState({pullingState: e.state});
   }
 
   getContent() {
@@ -115,8 +97,116 @@ class MainPage extends React.Component {
   }
 
   render() {
-    const { navigator } = this.props;
+    const { pushPage } = this.props;
+    return (
+      <Page renderToolbar={this.renderToolbar}>
+        <PullHook
+          onChange={this.handleChange}
+          onLoad={this.handleLoad}
+        >
+          {this.getContent()}
+        </PullHook>
+        <LocationList pushPage={pushPage} />
+        <AddLocation />
+      </Page>
+    );
+  }
+}
 
+
+class MainPage extends React.Component {
+  constructor(props) {
+    super(props);
+
+    const routeConfig = RouterUtil.init([{
+        component: ListPage,
+        props: {
+          key: 'main',
+          pushPage: (...args) => this.pushPage(...args)
+        }
+    }]);
+
+    this.state = {
+      pullingState: 'initial',
+      isOpen: false,
+      routeConfig: routeConfig,
+    };
+    this.dispatch = props.dispatch;
+
+    this.menuItems = [
+      {title: 'Add location', icon: 'ion-plus', page: null},
+      {title: 'Settings', icon: 'ion-gear-b', page: null}
+    ];
+
+    // bindings to be able to access `this`
+    this.onOpenMenu = this.onOpenMenu.bind(this);
+    this.onCloseMenu = this.onCloseMenu.bind(this);
+    this.onClickMenuPage = this.onClickMenuPage.bind(this);
+  }
+
+  pushPage(page, key) {
+    const route = {
+      component: page,
+      props: {
+        key: key,
+        popPage: () => this.popPage(),
+        pushPage: (...args) => this.pushPage(...args)
+      }
+    };
+
+    let routeConfig = this.state.routeConfig;
+
+    routeConfig = RouterUtil.push({
+      routeConfig,
+      route
+    });
+
+    this.setState({routeConfig});
+  }
+
+  popPage(options = {}) {
+    let routeConfig = this.state.routeConfig;
+
+    routeConfig = RouterUtil.pop({
+      routeConfig,
+      options: {
+        ...options,
+        animationOptions: {duration: 0.4}
+      }
+    });
+
+    this.setState({routeConfig});
+  }
+
+  onPostPush() {
+    const routeConfig = RouterUtil.postPush(this.state.routeConfig);
+    this.setState({routeConfig});
+  }
+
+  onPostPop() {
+    const routeConfig = RouterUtil.postPop(this.state.routeConfig);
+    this.setState({routeConfig});
+  }
+
+  onCloseMenu() {
+    this.setState({isOpen: false});
+  }
+
+  onOpenMenu() {
+    this.setState({isOpen: true});
+  }
+
+  onClickMenuPage(page) {
+    this.onCloseMenu();
+    // TODO: Go to the page
+  }
+
+  renderPage(route) {
+    const props = route.props || {};
+    return <route.component {...props} />;
+  }
+
+  render() {
     return (
       <Splitter>
         <SplitterSide
@@ -145,15 +235,15 @@ class MainPage extends React.Component {
           </Page>
         </SplitterSide>
         <SplitterContent>
-          <Page renderToolbar={this.renderToolbar}>
-            <PullHook
-              onChange={this.handleChange}
-              onLoad={this.handleLoad}
-            >
-              {this.getContent()}
-            </PullHook>
-            <LocationList navigator={navigator} />
-            <AddLocation />
+          <Page>
+            <RouterNavigator
+              swipeable={true}
+              swipePop={options => this.popPage(options)}
+              routeConfig={this.state.routeConfig}
+              renderPage={this.renderPage}
+              onPostPush={() => this.onPostPush()}
+              onPostPop={() => this.onPostPop()}
+            />
           </Page>
         </SplitterContent>
       </Splitter>

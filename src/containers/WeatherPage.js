@@ -66,7 +66,8 @@ const styles = {
 };
 
 const WeatherPage = ({
-  navigator,
+  pushPage,
+  popPage,
   name,
   temperature,
   humidity,
@@ -123,11 +124,8 @@ const WeatherPage = ({
     );
   }
 
-  console.log('navigator!');
-  console.log(navigator);
-
   return (
-    <Page renderToolbar={() => <NavBar backButton={true} title={`Weather in ${name}`} navigator={navigator} />}>
+    <Page renderToolbar={() => <NavBar backButton={true} title={`Weather in ${name}`} popPage={popPage} />}>
       <div style={styles.main}>
         {content}
       </div>
