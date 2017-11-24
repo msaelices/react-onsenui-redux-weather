@@ -8,6 +8,7 @@ This app was built using [Onsen UI](https://onsen.io/), a hybrid app framework t
 
 Check out the demo [here](http://argelius.github.io/react-onsenui-redux-weather/demo.html).
 
+
 ## How to run it
 
 To run it simply do:
@@ -44,6 +45,7 @@ cordova run android
 
 This assumes that you have the Android SDK installed.
 
+
 ## Contributing
 
 1. Fork it ( https://github.com/argelius/react-onsenui-redux-weather/fork )
@@ -51,3 +53,9 @@ This assumes that you have the Android SDK installed.
 3. Commit your changes (`git commit -am 'Add some feature'`)
 4. Push to the branch (`git push origin my-new-feature`)
 5. Create new Pull Request
+
+
+## Contributing to Onsen UI
+
+See https://github.com/OnsenUI/OnsenUI/blob/master/.github/CONTRIBUTING.md
+
