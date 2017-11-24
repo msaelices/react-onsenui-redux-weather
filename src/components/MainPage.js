@@ -66,7 +66,7 @@ class MainPage extends React.Component {
   }
 
   render() {
-    const { navigator } = this;
+    const { navigator } = this.props;
     return (
       <Page renderToolbar={() => <NavBar title='Onsen Weather' navigator={navigator} />}>
         <PullHook
