@@ -71,7 +71,7 @@ const Location = ({
   return (
     <ListItem onClick={() => {
       actions.selectLocation(id);
-      navigator.pushPage({component: WeatherPage});
+      navigator.pushPage({component: WeatherPage, key: 'WEATHER-PAGE'});
     }} tappable>
       <div className='left'>
         <div style={{...styles.weatherIcon, backgroundColor: weatherColor}}>
