@@ -18,7 +18,7 @@ class NavApp extends React.Component {
   }
 
   render() {
-    const {title, popPage, backButton} = this.props;
+    const {title, backButton} = this.props;
 
     return (
       <Toolbar>
