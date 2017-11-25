@@ -70,10 +70,10 @@ class ListPage extends React.Component {
   renderToolbar() {
     return (
       <Toolbar>
-        <ToolbarButton onClick={this.onOpenMenu}>
+        <ToolbarButton onClick={this.props.openMenu}>
           <Icon icon='ion-navicon' />
         </ToolbarButton>
-        Onsen Weather
+        <div className="center">Onsen Weather</div>
       </Toolbar>
     );
   }

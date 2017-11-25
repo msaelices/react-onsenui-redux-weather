@@ -32,7 +32,8 @@ class MainPage extends React.Component {
       component: ListPage,
       props: {
         key: 'main',
-        pushPage: (...args) => this.pushPage(...args)
+        pushPage: (...args) => this.pushPage(...args),
+        openMenu: () => this.openMenu(),
       }
     }]);
 
@@ -49,7 +50,7 @@ class MainPage extends React.Component {
     ];
 
     // bindings to be able to access `this`
-    this.onOpenMenu = this.onOpenMenu.bind(this);
+    this.openMenu = this.openMenu.bind(this);
     this.onCloseMenu = this.onCloseMenu.bind(this);
     this.onClickMenuPage = this.onClickMenuPage.bind(this);
   }
@@ -60,7 +61,8 @@ class MainPage extends React.Component {
       props: {
         key: key,
         popPage: () => this.popPage(),
-        pushPage: (...args) => this.pushPage(...args)
+        pushPage: (...args) => this.pushPage(...args),
+        openMenu: () => this.openMenu(),
       }
     };
 
@@ -102,7 +104,7 @@ class MainPage extends React.Component {
     this.setState({isOpen: false});
   }
 
-  onOpenMenu() {
+  openMenu() {
     this.setState({isOpen: true});
   }
 
@@ -127,7 +129,7 @@ class MainPage extends React.Component {
           swipeable={true}
           isOpen={this.state.isOpen}
           onClose={this.onCloseMenu}
-          onOpen={this.onOpenMenu}
+          onOpen={this.openMenu}
         >
           <Page>
             <List
