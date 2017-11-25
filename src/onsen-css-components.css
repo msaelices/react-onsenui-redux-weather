@@ -10,3 +10,11 @@
     margin-right: 5px;
   }
 }
+
+ons-toolbar:not([inline]) {
+  align-items: center;
+}
+
+.toolbar-button--material {
+  height: auto;
+}
