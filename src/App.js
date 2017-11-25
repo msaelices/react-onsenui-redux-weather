@@ -4,7 +4,7 @@ import {
   Navigator
 } from 'react-onsenui';
 
-import MainPage from './MainPage';
+import MainPage from './pages/MainPage';
 
 const renderPage = (route, navigator) => (
   <route.component key={route.key} navigator={navigator} />

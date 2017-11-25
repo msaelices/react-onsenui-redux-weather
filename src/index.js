@@ -9,7 +9,7 @@ import {createLogger} from 'redux-logger';
 import {AppContainer} from 'react-hot-loader';
 
 import weatherApp from './reducers';
-import App from './containers/App';
+import App from './App';
 
 import ons from 'onsenui';
 
@@ -56,8 +56,8 @@ ons.ready(() => render(
 ));
 
 if (module.hot) {
-  module.hot.accept('./containers/App', () => {
-    const NextApp = require('./containers/App').default;
+  module.hot.accept('./App', () => {
+    const NextApp = require('./App').default;
     render(
       <AppContainer>
         <Provider store={store}>

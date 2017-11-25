@@ -7,8 +7,8 @@ import {ListItem, Icon} from 'react-onsenui';
 import {platform} from 'onsenui';
 
 import * as Actions from '../actions';
-import WeatherPage from './WeatherPage';
 import WeatherIcon from '../components/WeatherIcon';
+import WeatherPage from '../pages/WeatherPage';
 import {weatherCodeToColor} from '../util';
 
 const styles = {
