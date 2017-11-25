@@ -73,7 +73,7 @@ class ListPage extends React.Component {
         <ToolbarButton onClick={this.props.openMenu}>
           <Icon icon='ion-navicon' />
         </ToolbarButton>
-        <div className="center">Onsen Weather</div>
+        <div className='center'>Onsen Weather</div>
       </Toolbar>
     );
   }
