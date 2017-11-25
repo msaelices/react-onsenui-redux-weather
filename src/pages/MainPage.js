@@ -28,12 +28,15 @@ class MainPage extends React.Component {
   constructor(props) {
     super(props);
 
+    this.dispatch = props.dispatch;
+
     const routeConfig = RouterUtil.init([{
       component: ListPage,
       props: {
         key: 'main',
         pushPage: (...args) => this.pushPage(...args),
         openMenu: () => this.openMenu(),
+        dispatch: this.dispatch,
       }
     }]);
 
@@ -42,7 +45,6 @@ class MainPage extends React.Component {
       isOpen: false,
       routeConfig: routeConfig,
     };
-    this.dispatch = props.dispatch;
 
     this.menuItems = [
       {title: 'Add location', icon: 'ion-plus', page: null},
@@ -63,6 +65,7 @@ class MainPage extends React.Component {
         popPage: () => this.popPage(),
         pushPage: (...args) => this.pushPage(...args),
         openMenu: () => this.openMenu(),
+        dispatch: this.dispatch,
       }
     };
 
