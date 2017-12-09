@@ -8,6 +8,12 @@ This app was built using [Onsen UI](https://onsen.io/), a hybrid app framework t
 
 Check out the demo [here](http://argelius.github.io/react-onsenui-redux-weather/demo.html).
 
+## Some features
+
+* Add/remove user's locations, storing them on localStorage.
+* Retrieve locations forecasts, using openweathermap.org API, with pull-to-refresh control.
+* Side menu.
+
 
 ## How to run it
 
@@ -46,6 +52,16 @@ cordova run android
 This assumes that you have the Android SDK installed.
 
 
+## Roadmap
+
+* Settings page, to allow users change metrics, preferred city and other stuff.
+* SVG animations for weather icons.
+* Autocompletion using Google geocoding API.
+* App icon showing current weather in the first location.
+* Drag-and-drop cities to change ordering.
+* Show city photos in the forecast detail page, using Google Place API.
+
+
 ## Contributing
 
 1. Fork it ( https://github.com/argelius/react-onsenui-redux-weather/fork )
@@ -59,3 +75,7 @@ This assumes that you have the Android SDK installed.
 
 See https://github.com/OnsenUI/OnsenUI/blob/master/.github/CONTRIBUTING.md
 
+
+## Notes
+
+Forked from https://github.com/argelius/react-onsenui-redux-weather, but with more features. There is a Vue version for the same app on github.com/msaelices/vue-onsenui-weather
